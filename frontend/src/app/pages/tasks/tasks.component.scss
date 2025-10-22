@@ -1,0 +1,133 @@
+.tasks {
+  .tasks-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    gap: 1rem;
+
+    h2 {
+      margin: 0;
+      color: #333;
+    }
+
+    .tasks-filters {
+      display: flex;
+      gap: 1rem;
+
+      .filter-select {
+        padding: 0.5rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        background-color: white;
+      }
+    }
+
+    .btn-primary {
+      background-color: #1976d2;
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: #1565c0;
+      }
+    }
+  }
+
+  .tasks-list {
+    display: grid;
+    gap: 1rem;
+
+    .task-card {
+      background: white;
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      border-left: 4px solid #1976d2;
+
+      .task-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 1rem;
+
+        h4 {
+          margin: 0;
+          color: #333;
+          font-size: 1.1rem;
+        }
+
+        .task-priority {
+          padding: 0.25rem 0.5rem;
+          border-radius: 12px;
+          font-size: 0.8rem;
+          font-weight: 500;
+
+          &.priority-low {
+            background-color: #d4edda;
+            color: #155724;
+          }
+
+          &.priority-medium {
+            background-color: #fff3cd;
+            color: #856404;
+          }
+
+          &.priority-high {
+            background-color: #f8d7da;
+            color: #721c24;
+          }
+
+          &.priority-urgent {
+            background-color: #f5c6cb;
+            color: #721c24;
+          }
+        }
+      }
+
+      .task-content {
+        margin-bottom: 1rem;
+
+        p {
+          margin: 0;
+          color: #666;
+          line-height: 1.5;
+        }
+      }
+
+      .task-meta {
+        margin-bottom: 1rem;
+
+        .meta-item {
+          display: flex;
+          margin-bottom: 0.25rem;
+
+          .meta-label {
+            font-weight: 500;
+            color: #333;
+            min-width: 80px;
+          }
+
+          .meta-value {
+            color: #666;
+          }
+        }
+      }
+
+      .task-status {
+        .status-badge {
+          padding: 0.25rem 0.75rem;
+          border-radius: 12px;
+          font-size: 0.8rem;
+          font-weight: 500;
+          color: white;
+        }
+      }
+    }
+  }
+}
