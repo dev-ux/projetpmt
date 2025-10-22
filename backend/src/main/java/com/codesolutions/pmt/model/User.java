@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+import lombok.Builder.Default;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -11,6 +14,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "users")
+@Builder
+@NoArgsConstructor
 public class User {
 
     @Id
@@ -43,6 +48,7 @@ public class User {
     private String avatarUrl;
 
     @Column(name = "is_active")
+    @Default
     private Boolean isActive = true;
 
     @Column(name = "created_at")
@@ -53,34 +59,41 @@ public class User {
 
     // Relations
     @ManyToMany(mappedBy = "members")
+    @Default
     private List<Team> teams = new ArrayList<>();
 
     @ManyToMany(mappedBy = "members")
+    @Default
     private List<Project> projects = new ArrayList<>();
 
     @OneToMany(mappedBy = "createdBy")
+    @Default
     private List<Team> createdTeams = new ArrayList<>();
 
     @OneToMany(mappedBy = "createdBy")
+    @Default
     private List<Project> createdProjects = new ArrayList<>();
 
     @OneToMany(mappedBy = "assignee")
+    @Default
     private List<Task> assignedTasks = new ArrayList<>();
 
     @OneToMany(mappedBy = "createdBy")
+    @Default
     private List<Task> createdTasks = new ArrayList<>();
 
     @OneToMany(mappedBy = "author")
+    @Default
     private List<Comment> comments = new ArrayList<>();
 
     @OneToMany(mappedBy = "uploadedBy")
+    @Default
     private List<Attachment> attachments = new ArrayList<>();
 
-    // Constructors
-    public User() {}
-
     public User(Long id, String email, String password, String firstName, String lastName,
-                String avatarUrl, Boolean isActive, LocalDateTime createdAt, LocalDateTime updatedAt) {
+                String avatarUrl, Boolean isActive, LocalDateTime createdAt, LocalDateTime updatedAt,
+                List<Team> teams, List<Project> projects, List<Team> createdTeams, List<Project> createdProjects,
+                List<Task> assignedTasks, List<Task> createdTasks, List<Comment> comments, List<Attachment> attachments) {
         this.id = id;
         this.email = email;
         this.password = password;
@@ -90,6 +103,14 @@ public class User {
         this.isActive = isActive;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.teams = teams != null ? teams : new ArrayList<>();
+        this.projects = projects != null ? projects : new ArrayList<>();
+        this.createdTeams = createdTeams != null ? createdTeams : new ArrayList<>();
+        this.createdProjects = createdProjects != null ? createdProjects : new ArrayList<>();
+        this.assignedTasks = assignedTasks != null ? assignedTasks : new ArrayList<>();
+        this.createdTasks = createdTasks != null ? createdTasks : new ArrayList<>();
+        this.comments = comments != null ? comments : new ArrayList<>();
+        this.attachments = attachments != null ? attachments : new ArrayList<>();
     }
 
     // Getters and Setters
