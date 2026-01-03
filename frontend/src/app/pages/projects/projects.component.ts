@@ -37,7 +37,7 @@ import { Project } from '../../models';
             </div>
             <div class="meta-item" *ngIf="project.budget">
               <span class="meta-label">Budget:</span>
-              <span class="meta-value">${{ project.budget | number:'1.0-0' }}</span>
+              <span class="meta-value">\${{ project.budget }}</span>
             </div>
           </div>
 

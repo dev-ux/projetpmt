@@ -72,7 +72,7 @@ export class TeamsComponent implements OnInit {
 
   getTeamMembersCount(teamId: number): number {
     // Mock data - in real app this would come from service
-    const membersCount = {
+    const membersCount: { [key: number]: number } = {
       1: 4,
       2: 2
     };
