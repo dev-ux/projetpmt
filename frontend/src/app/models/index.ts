@@ -7,8 +7,6 @@ export interface User {
   isActive: boolean;
   createdAt: string;
   updatedAt: string;
-
-  get fullName(): string;
 }
 
 export interface Project {
