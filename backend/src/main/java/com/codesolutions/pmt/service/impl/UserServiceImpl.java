@@ -5,7 +5,8 @@ import com.codesolutions.pmt.model.User;
 import com.codesolutions.pmt.repository.UserRepository;
 import com.codesolutions.pmt.service.UserService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,10 +17,10 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-@Slf4j
 @Transactional
 public class UserServiceImpl implements UserService {
 
+    private static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
     private final UserRepository userRepository;
 
     @Override
@@ -66,13 +67,12 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException("User already exists with email: " + userDTO.getEmail());
         }
 
-        User user = User.builder()
-                .email(userDTO.getEmail())
-                .firstName(userDTO.getFirstName())
-                .lastName(userDTO.getLastName())
-                .avatarUrl(userDTO.getAvatarUrl())
-                .isActive(userDTO.getIsActive() != null ? userDTO.getIsActive() : true)
-                .build();
+        User user = new User();
+        user.setEmail(userDTO.getEmail());
+        user.setFirstName(userDTO.getFirstName());
+        user.setLastName(userDTO.getLastName());
+        user.setAvatarUrl(userDTO.getAvatarUrl());
+        user.setIsActive(userDTO.getIsActive() != null ? userDTO.getIsActive() : true);
 
         User savedUser = userRepository.save(user);
         log.info("User created successfully with id: {}", savedUser.getId());
@@ -157,15 +157,15 @@ public class UserServiceImpl implements UserService {
     }
 
     private UserDTO convertToDTO(User user) {
-        return UserDTO.builder()
-                .id(user.getId())
-                .email(user.getEmail())
-                .firstName(user.getFirstName())
-                .lastName(user.getLastName())
-                .avatarUrl(user.getAvatarUrl())
-                .isActive(user.getIsActive())
-                .createdAt(user.getCreatedAt())
-                .updatedAt(user.getUpdatedAt())
-                .build();
+        UserDTO dto = new UserDTO();
+        dto.setId(user.getId());
+        dto.setEmail(user.getEmail());
+        dto.setFirstName(user.getFirstName());
+        dto.setLastName(user.getLastName());
+        dto.setAvatarUrl(user.getAvatarUrl());
+        dto.setIsActive(user.getIsActive());
+        dto.setCreatedAt(user.getCreatedAt());
+        dto.setUpdatedAt(user.getUpdatedAt());
+        return dto;
     }
 }

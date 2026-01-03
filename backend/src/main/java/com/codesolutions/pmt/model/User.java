@@ -4,7 +4,9 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Builder.Default;
 
@@ -16,6 +18,8 @@ import java.util.List;
 @Table(name = "users")
 @Builder
 @NoArgsConstructor
+@AllArgsConstructor
+@Data
 public class User {
 
     @Id
@@ -89,166 +93,6 @@ public class User {
     @OneToMany(mappedBy = "uploadedBy")
     @Default
     private List<Attachment> attachments = new ArrayList<>();
-
-    public User(Long id, String email, String password, String firstName, String lastName,
-                String avatarUrl, Boolean isActive, LocalDateTime createdAt, LocalDateTime updatedAt,
-                List<Team> teams, List<Project> projects, List<Team> createdTeams, List<Project> createdProjects,
-                List<Task> assignedTasks, List<Task> createdTasks, List<Comment> comments, List<Attachment> attachments) {
-        this.id = id;
-        this.email = email;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.avatarUrl = avatarUrl;
-        this.isActive = isActive;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-        this.teams = teams != null ? teams : new ArrayList<>();
-        this.projects = projects != null ? projects : new ArrayList<>();
-        this.createdTeams = createdTeams != null ? createdTeams : new ArrayList<>();
-        this.createdProjects = createdProjects != null ? createdProjects : new ArrayList<>();
-        this.assignedTasks = assignedTasks != null ? assignedTasks : new ArrayList<>();
-        this.createdTasks = createdTasks != null ? createdTasks : new ArrayList<>();
-        this.comments = comments != null ? comments : new ArrayList<>();
-        this.attachments = attachments != null ? attachments : new ArrayList<>();
-    }
-
-    // Getters and Setters
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getAvatarUrl() {
-        return avatarUrl;
-    }
-
-    public void setAvatarUrl(String avatarUrl) {
-        this.avatarUrl = avatarUrl;
-    }
-
-    public Boolean getIsActive() {
-        return isActive;
-    }
-
-    public void setIsActive(Boolean isActive) {
-        this.isActive = isActive;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    public List<Team> getTeams() {
-        return teams;
-    }
-
-    public void setTeams(List<Team> teams) {
-        this.teams = teams;
-    }
-
-    public List<Project> getProjects() {
-        return projects;
-    }
-
-    public void setProjects(List<Project> projects) {
-        this.projects = projects;
-    }
-
-    public List<Team> getCreatedTeams() {
-        return createdTeams;
-    }
-
-    public void setCreatedTeams(List<Team> createdTeams) {
-        this.createdTeams = createdTeams;
-    }
-
-    public List<Project> getCreatedProjects() {
-        return createdProjects;
-    }
-
-    public void setCreatedProjects(List<Project> createdProjects) {
-        this.createdProjects = createdProjects;
-    }
-
-    public List<Task> getAssignedTasks() {
-        return assignedTasks;
-    }
-
-    public void setAssignedTasks(List<Task> assignedTasks) {
-        this.assignedTasks = assignedTasks;
-    }
-
-    public List<Task> getCreatedTasks() {
-        return createdTasks;
-    }
-
-    public void setCreatedTasks(List<Task> createdTasks) {
-        this.createdTasks = createdTasks;
-    }
-
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
-    }
-
-    public List<Attachment> getAttachments() {
-        return attachments;
-    }
-
-    public void setAttachments(List<Attachment> attachments) {
-        this.attachments = attachments;
-    }
 
     @PrePersist
     protected void onCreate() {
